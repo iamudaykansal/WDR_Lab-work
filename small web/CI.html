@@ -1,0 +1,65 @@
+<!-- Webpage for calculating Compound Interest -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compound Interest</title>
+    <!-- Linking external CSS file for styling -->
+    <link rel="stylesheet" href="style.css" />
+
+    <script>
+      /*-----------------------------------------
+        Function to calculate Compound Interest
+      ------------------------------------------*/
+      function compoundInterest() {
+        // Clear the previous result text
+        document.getElementById("result").innerText = "";
+
+        // Fetching user inputs and converting them to numbers
+        const Principle = parseFloat(document.getElementById("principle").value);
+        const Rate = parseFloat(document.getElementById("rate").value);
+        const Time = parseInt(document.getElementById("time").value);
+        const Frequency = parseInt(document.getElementById("frequency").value);
+
+        // Calculating total amount using compound interest formula:
+        // A = P * (1 + R/(100*F))^(F*T)
+        let Amount = Principle * Math.pow(1 + Rate / 100 / Frequency, Frequency * Time);
+
+        // Calculating compound interest
+        let CI = Amount - Principle;
+
+        // Displaying the result in the div element
+        document.getElementById("result").innerText = "Compound Interest : " + CI;
+      }
+    </script>
+  </head>
+
+  <body>
+    <h2>Compound Interest</h2>
+
+    <!-- Input fields for user to enter values -->
+    Principle :
+    <input type="number" id="principle" min="0" step="0.01" required />
+    <br /><br />
+
+    Rate (% per annum):
+    <input type="number" id="rate" min="0" step="0.01" required />
+    <br /><br />
+
+    Time (in years):
+    <input type="number" id="time" min="0" required />
+    <br /><br />
+
+    Frequency (no. of times interest compounded per year):
+    <input type="number" id="frequency" min="1" step="1" required />
+    <br /><br />
+
+    <!-- Button to trigger the calculation -->
+    <input type="button" value="Calculate CI" onclick="compoundInterest()" />
+    <br /><br />
+
+    <!-- Div to display the output -->
+    <div id="result"></div>
+  </body>
+</html>

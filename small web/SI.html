@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Interest</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      function simpleInterest() {
+        /*----setting result div as blank -----*/
+        document.getElementById("result").innerText = "";
+        /*---- fetching data from textfield ------*/
+        const Principle = parseFloat(document.getElementById("principle").value);
+        const Rate = parseFloat(document.getElementById("rate").value);
+        const Time = parseInt(document.getElementById("time").value);
+        /*--- calculating SI ----*/
+        const SI = (Principle * Rate * Time) / 100;
+        /*---- displaying data in div ----*/
+        document.getElementById("result").innerText = "Simple Interest : " + SI;
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Simple Interest</h2>
+    <!-- textarea for input from user -->
+    Principle :
+    <input type="number" id="principle" min="0" step="0.01" required />
+    <br /><br />
+    Rate : <input type="number" id="rate" min="0" step="0.01" required />
+    <br /><br />
+    Time : <input type="number" id="time" min="0" required /> <br /><br />
+
+    <!-- Making a button for output  -->
+    <input type="button" value="SI" onclick="simpleInterest()" />
+    <br /><br />
+    <!-- empty div for printing output -->
+    <div id="result"></div>
+  </body>
+</html>
