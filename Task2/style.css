@@ -1,0 +1,112 @@
+/* --- Reset some default styles --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* --- Page background --- */
+body {
+  background: linear-gradient(135deg, #74b9ff, #a29bfe);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- To-do container --- */
+.todo {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 15px;
+  width: 60%;
+  text-align: center;
+}
+
+/* --- Title --- */
+.todo h2 {
+  color: #2d3436;
+  margin-bottom: 20px;
+}
+
+/* --- Input field --- */
+#task {
+  width: 80%;
+  padding: 12px;
+  border: 2px solid #0984e3;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+}
+
+
+/* --- Add Task Button --- */
+input[type="button"] {
+  background-color: #00b894;
+  color: white;
+  border: none;
+  font-size: 0.8em;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+input[type="button"]:hover {
+  background-color: #019875;
+  transform: scale(1.05);
+}
+
+/* --- Error message --- */
+#error_msg {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* --- Task list --- */
+#tasklist {
+  list-style-type: none;
+  margin-top: 20px;
+  padding: 0;
+}
+
+/* --- Each list item --- */
+#tasklist li {
+  background-color: #f1f2f6;
+  margin-bottom: 12px;
+  padding: 8px;
+  border: 1px solid blue;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+}
+
+/* --- Buttons inside list items --- */
+#tasklist button {
+  margin-left: 5px;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+/* --- Complete button --- */
+#tasklist button[id*="complete"] {
+  background-color: green;
+  color: white;
+}
+
+
+/* --- Delete button --- */
+#tasklist button[id*="delete"] {
+  background-color: #d63031;
+  color: white;
+}
+
+
