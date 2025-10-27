@@ -1,0 +1,152 @@
+<!--To-Do List Web Application-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>To-Do List</title>
+
+    <!-- Linking external CSS file for styling -->
+    <link rel="stylesheet" href="design.css" />
+  </head>
+
+  <body>
+    <!-- todo div , will work as container for app -->
+    <div class="todo">
+      <!-- Input field where user enters a new task -->
+      <input
+        type="text"
+        id="task"
+        class="textField"
+        required
+      />
+
+      <!-- Button to add task when clicked -->
+      <input
+        type="button"
+        value="Add Task"
+        onclick="addtask()"
+        class="addtask"
+      />
+
+      <!-- Error message displayed if user enters blank input -->
+      <div id="error_msg"></div>
+
+      <!-- Unordered list that will dynamically display all tasks -->
+      <ul id="tasklist"></ul>
+    </div>
+
+    <script>
+      // Initialize an empty array to store all added tasks
+      let task_array = [];
+       // Function to add a new task to the list
+      function addtask() {
+        // Get the entered text and remove extra spaces
+        const data = document.getElementById("task").value.trim();
+
+        // Validate input
+        if (data !== "") {
+          // Clear any previous error message
+          document.getElementById("error_msg").innerText = "";
+
+          // Find index of new task (useful for unique IDs)
+          const task_index = task_array.length;
+
+          // Store task text in array
+          task_array.push(data);
+
+          // Display task in the list
+          displayTask(data, task_index);
+        } else {
+          // Show error if input is blank
+          document.getElementById("error_msg").innerText =
+            "Blank text not allowed";
+        }
+
+        // Reset input field after adding task
+        document.getElementById("task").value = "";
+      }
+
+      // ---------------------- DISPLAY TASK FUNCTION ----------------------
+
+      /**
+       * Function to create and display a new task item in the list
+       * @param {string} task_data - The text of the task
+       * @param {number} index - Position/index of the task in the array
+       */
+      function displayTask(task_data, index) {
+        // Create a new <li> element to hold the task
+        const listitem = document.createElement("li");
+        listitem.id = "list-" + index; // Assign unique ID for identification
+
+        // Create a <span> element to hold the task text
+        const taskSpan = document.createElement("span");
+        taskSpan.textContent = task_data;
+        taskSpan.classList.add("task-text");
+
+        // ---------------------- COMPLETE BUTTON ----------------------
+
+        // Create a button to mark the task as complete
+        const complete_button = document.createElement("button");
+        complete_button.id = "complete-" + index;
+        complete_button.textContent = "Mark As Complete";
+        complete_button.classList.add("complete-btn");
+
+        // Define action when 'Complete' button is clicked
+        complete_button.onclick = function () {
+          // Extract index number from button ID
+          const btn_id = this.id;
+          const data = btn_id.split("-");
+          const li_id = "list-" + data[1];
+
+          // Get the corresponding list item
+          const listItem = document.getElementById(li_id);
+
+          // Change text color to green to show completion
+          listItem.querySelector(".task-text").style.color = "green";
+
+          // Update button text and disable it
+          this.textContent = "Completed";
+          this.disabled = true;
+          this.classList.add("disabled-btn");
+        };
+
+        // ---------------------- DELETE BUTTON ----------------------
+
+        // Create a button to delete the task
+        const delete_button = document.createElement("button");
+        delete_button.id = "delete-" + index;
+        delete_button.textContent = "Delete";
+        delete_button.classList.add("delete-btn");
+
+        // Define action when 'Delete' button is clicked
+        delete_button.onclick = function () {
+          // Extract task index from button ID
+          const btn_id = this.id;
+          const data = btn_id.split("-");
+          const li_id = "list-" + data[1];
+
+          // Remove task from the array (set to undefined)
+          delete task_array[data[1]];
+
+          // Remove task element from the list
+          document.getElementById(li_id).remove();
+
+          // Log remaining array for debugging
+          console.log(task_array);
+        };
+
+        // ---------------------- APPEND ELEMENTS ----------------------
+
+        // Add task text, complete button, and delete button inside <li>
+        listitem.appendChild(taskSpan);
+        listitem.appendChild(complete_button);
+        listitem.appendChild(delete_button);
+
+        // Append the <li> to the main <ul> (task list)
+        document.getElementById("tasklist").appendChild(listitem);
+      }
+    </script>
+  </body>
+</html>
